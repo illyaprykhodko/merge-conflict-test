@@ -163,7 +163,10 @@ func gatherEpochVotes(cProps *ConnectionProps, startBlock *big.Int, head uint64)
 			if !ok {
 				continue
 			}
-
+			if !seen[voter] {
+				seen[voter] = true
+				order = append(order, voter)
+			}
 			if evt.Arg2 == resetVoteData {
 				delete(current, voter)
 				continue
